@@ -1,6 +1,6 @@
 # Photo To Claymation Shot
 
-Turn a portrait photo into an Aardman-style claymation cinematic still, then deliver a clean before/after comparison image.
+Turn a portrait photo into an Aardman-style claymation cinematic still, then deliver both a clean before/after comparison image and a movie-spec cinematic matte frame.
 
 This Codex skill is designed for photo-to-image workflows where the output should feel like a handcrafted stop-motion film frame instead of a simple style filter.
 
@@ -11,13 +11,14 @@ This Codex skill is designed for photo-to-image workflows where the output shoul
 - Rebuilds the person as a handmade clay character in a miniature stop-motion set.
 - Removes useless source-image borders such as black bars or blank scan margins.
 - Generates the claymation result at the cleaned source image's dimensions when possible.
-- Delivers one combined comparison image by default:
+- Delivers two final image artifacts by default:
+- A combined comparison image:
   - portrait source images: original and result side by side
   - landscape source images: original above result
   - square source images: original above result
   - same-framing results are resized/cropped directly to the cleaned source dimensions
   - cinematic results use a Photoshop-like layer alignment step so the core subject height and body anchors match before cropping
-- Optionally creates a cinematic matte frame:
+- A cinematic matte frame:
   - final canvas: 4:3
   - active movie picture: 16:9
   - default: `1440 x 1080` canvas with a `1440 x 810` active picture and black bars above/below
