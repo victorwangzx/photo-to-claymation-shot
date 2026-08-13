@@ -30,7 +30,7 @@ Use this skill when the user provides or references a person photo and asks to:
 8. Produce the requested output:
    - If the user asks for a prompt, output the photo breakdown and the final S/W/I/F/T/P/M prompt.
    - If the user asks for an image, internally perform the breakdown, generate the claymation still, then compose the original photo and generated still into one finished comparison image unless the user explicitly asks for the effect image only.
-   - If the user asks for a cinematic, movie-spec, poster-like, film-frame, or presentation-ready image, also create a cinematic matte frame from the generated still.
+   - If the user asks for a cinematic, movie-spec, poster-like, film-frame, or presentation-ready image, generate a separate 16:9 cinematic shot first, then create a cinematic matte frame from that shot.
 
 ## Output Formats
 
@@ -80,14 +80,16 @@ Use [scripts/compose_comparison.py](scripts/compose_comparison.py) for determini
 
 Use this as an additional deliverable when the user asks for a more cinematic, shareable, film-still, poster-like, or animation-movie-spec image.
 
-- Create the claymation still as a 16:9 active picture whenever possible.
+- Do not create this by cropping the comparison result or a portrait-format generated still.
+- First generate a separate 16:9 cinematic shot that preserves the source person's recognition cues while extending or redesigning the environment as a movie scene.
+- Read [references/cinematic-shot-design.md](references/cinematic-shot-design.md) before writing or generating a cinematic-frame prompt.
 - Place the 16:9 active picture inside a 4:3 final canvas with black bars above and below.
 - Default final canvas: `1440 x 1080`; default active picture: `1440 x 810`; top and bottom bars: `135 px` each.
 - For higher-resolution delivery, use another 4:3 canvas while preserving the same math, for example `1920 x 1440` with a `1920 x 1080` active picture.
 - Keep the active picture free of text, logos, watermarks, and fake lettering.
 - The cinematic matte frame is a display deliverable, not the source image for before/after comparison. Keep comparison composition based on the cleaned source photo dimensions.
 
-Use [scripts/create_cinematic_frame.py](scripts/create_cinematic_frame.py) for deterministic matte framing when a standalone generated result is available.
+Use [scripts/create_cinematic_frame.py](scripts/create_cinematic_frame.py) only for deterministic matte framing after a true 16:9 cinematic shot is available.
 
 ## Guardrails
 
