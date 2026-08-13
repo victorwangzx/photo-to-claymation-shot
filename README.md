@@ -1,5 +1,7 @@
 # Photo To Claymation Shot
 
+Version: `1.0.0`
+
 Turn a portrait photo into an Aardman-style claymation cinematic still, then deliver both a clean before/after comparison image and a movie-spec cinematic matte frame.
 
 This Codex skill is designed for photo-to-image workflows where the output should feel like a handcrafted stop-motion film frame instead of a simple style filter.
