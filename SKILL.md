@@ -69,6 +69,7 @@ When the user asks for an image result, deliver one combined comparison image by
 - Put the generated claymation still in the other section. The generated still must match the cleaned original photo's pixel dimensions before final composition.
 - For comparison delivery, align the generated result to the source photo's core visual anchor before composition. The main person or core subject should keep a similar size, head/body scale, body crop, and position in both sections.
 - A separate 16:9 cinematic shot may be used in the comparison only when both sides are aligned by the core subject anchor, not by blind center-crop. It is acceptable to enlarge and crop the cleaned original photo to match the cinematic shot's subject scale and position when the cinematic shot is the desired comparison target.
+- When enlarging the source photo for a cinematic comparison, choose the crop anchor from the body evidence. If the subject's lower body, waist, bag, strap, hands, or ground contact are important, keep the lower-left or lower-body anchor fixed and remove extra area from the top/right instead of center-cropping. Do not crop away the waist, hands, bag, or other body cues needed to compare the person.
 - Never include the 4:3 black-bar cinematic frame in the comparison.
 - If the cleaned original image is landscape, stack original and result vertically.
 - If the cleaned original image is portrait, place original and result side by side horizontally.
