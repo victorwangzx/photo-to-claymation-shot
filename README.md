@@ -19,6 +19,7 @@ This Codex skill is designed for photo-to-image workflows where the output shoul
   - final canvas: 4:3
   - active movie picture: 16:9
   - default: `1440 x 1080` canvas with a `1440 x 810` active picture and black bars above/below
+  - the 16:9 movie picture is generated as a separate cinematic shot, not cropped from the portrait comparison image
 
 ## Install
 
@@ -48,6 +49,7 @@ Use this old family photo as the source. Preserve the two children, the winter w
 - `SKILL.md`: main skill workflow and guardrails
 - `references/swiftpm-framework.md`: S/W/I/F/T/P/M breakdown system
 - `references/claymation-style-rules.md`: claymation image style rules
+- `references/cinematic-shot-design.md`: 16:9 movie-shot direction rules
 - `scripts/compose_comparison.py`: deterministic before/after image composition helper
 - `scripts/create_cinematic_frame.py`: deterministic 4:3 film-frame helper with 16:9 active image area
 - `agents/openai.yaml`: Codex UI metadata
