@@ -67,6 +67,8 @@ When the user asks for an image result, deliver one combined comparison image by
 - Keep the original photo faithful in one section. Permit only proportional scaling or a slight crop needed to match the comparison layout.
 - Before composition, crop useless border information from the original photo, including black bars, blank scan margins, app-preview padding, or solid non-photo edges.
 - Put the generated claymation still in the other section. The generated still must match the cleaned original photo's pixel dimensions before final composition.
+- For comparison delivery, align the generated result to the source photo's core visual anchor before composition. The main person or core subject should keep a similar size, head/body scale, body crop, and position in both sections.
+- A separate 16:9 cinematic shot may be used in the comparison only when it is cropped or scaled by the core subject anchor, not by blind center-crop. Never include the 4:3 black-bar cinematic frame in the comparison.
 - If the cleaned original image is landscape, stack original and result vertically.
 - If the cleaned original image is portrait, place original and result side by side horizontally.
 - If the cleaned original image is square, stack original and result vertically.
@@ -88,6 +90,7 @@ Use this as an additional deliverable when the user asks for a more cinematic, s
 - For higher-resolution delivery, use another 4:3 canvas while preserving the same math, for example `1920 x 1440` with a `1920 x 1080` active picture.
 - Keep the active picture free of text, logos, watermarks, and fake lettering.
 - The cinematic matte frame is a display deliverable, not the source image for before/after comparison. Keep comparison composition based on the cleaned source photo dimensions.
+- If the 16:9 active cinematic picture is used in a before/after comparison, crop/scale it to the cleaned source dimensions while preserving the person's size and position as closely as possible. Use visual anchors such as face center, head height, torso position, hands, and crossbody straps rather than simple center-crop.
 
 Use [scripts/create_cinematic_frame.py](scripts/create_cinematic_frame.py) only for deterministic matte framing after a true 16:9 cinematic shot is available.
 
