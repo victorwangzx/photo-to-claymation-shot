@@ -1,6 +1,7 @@
 ---
 name: photo-to-claymation-shot
 description: Transform an uploaded portrait or character photo into an Aardman-style claymation cinematic still by first analyzing the photo through the S/W/I/F/T/P/M framework, then generating a handcrafted miniature stop-motion movie shot and delivering both an original-plus-result comparison image and a movie-spec cinematic matte frame. Use when the user provides a person photo and asks for clay animation, Aardman style, stop-motion film still, claymation character, SWIFTPM-based image prompt/design, original-plus-result comparison delivery, or movie-spec 16:9/4:3 black-bar framing.
+version: 1.0.0
 ---
 
 # Photo To Claymation Shot
