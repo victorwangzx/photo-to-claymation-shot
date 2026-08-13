@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+*.tmp
+*.log
+outputs/
+generated_images/
+assets/examples/
