@@ -64,8 +64,8 @@ def trim_solid_borders(image: Image.Image, tolerance: int, min_keep_ratio: float
     return image.crop((left, top, right + 1, bottom + 1))
 
 
-def cover_resize(image: Image.Image, size: tuple[int, int]) -> Image.Image:
-    return ImageOps.fit(image, size, method=Image.Resampling.LANCZOS, centering=(0.5, 0.5))
+def cover_resize(image: Image.Image, size: tuple[int, int], centering: tuple[float, float]) -> Image.Image:
+    return ImageOps.fit(image, size, method=Image.Resampling.LANCZOS, centering=centering)
 
 
 def contain_resize(image: Image.Image, size: tuple[int, int], background: tuple[int, int, int]) -> Image.Image:
@@ -86,6 +86,7 @@ def compose(
     trim_original_borders: bool,
     trim_tolerance: int,
     min_keep_ratio: float,
+    crop_center: tuple[float, float],
 ) -> None:
     original = Image.open(original_path).convert("RGB")
     result = Image.open(result_path).convert("RGB")
@@ -99,14 +100,14 @@ def compose(
     if orientation == "portrait":
         section_size = (width, height)
         left = original
-        right = cover_resize(result, section_size) if mode == "cover" else contain_resize(result, section_size, background)
+        right = cover_resize(result, section_size, crop_center) if mode == "cover" else contain_resize(result, section_size, background)
         canvas = Image.new("RGB", (section_size[0] * 2, section_size[1]), background)
         canvas.paste(left, (0, 0))
         canvas.paste(right, (section_size[0], 0))
     else:
         section_size = (width, height)
         top = original
-        bottom = cover_resize(result, section_size) if mode == "cover" else contain_resize(result, section_size, background)
+        bottom = cover_resize(result, section_size, crop_center) if mode == "cover" else contain_resize(result, section_size, background)
         canvas = Image.new("RGB", (section_size[0], section_size[1] * 2), background)
         canvas.paste(top, (0, 0))
         canvas.paste(bottom, (0, section_size[1]))
@@ -132,6 +133,8 @@ def main() -> None:
     parser.add_argument("--no-trim-original-borders", action="store_true")
     parser.add_argument("--trim-tolerance", type=int, default=24)
     parser.add_argument("--min-keep-ratio", type=float, default=0.55)
+    parser.add_argument("--crop-center-x", type=float, default=0.5)
+    parser.add_argument("--crop-center-y", type=float, default=0.5)
     args = parser.parse_args()
     compose(
         args.original,
@@ -142,6 +145,7 @@ def main() -> None:
         not args.no_trim_original_borders,
         args.trim_tolerance,
         args.min_keep_ratio,
+        (args.crop_center_x, args.crop_center_y),
     )
 
 
