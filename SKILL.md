@@ -62,19 +62,32 @@ For direct image generation, explicitly set or request the generated claymation 
 
 ## Image Delivery Composition
 
-When the user asks for an image result, deliver one combined comparison image by default:
+When the user asks for an image result, deliver one combined comparison image by default. Use this decision order:
+
+1. Clean the source: crop useless border information from the original photo first, including black bars, blank scan margins, app-preview padding, or solid non-photo edges.
+2. Choose one comparison mode:
+   - **Mode A - same-framing comparison**: use when the generated claymation still preserves the source photo's framing family: similar shot distance, subject scale, body crop, and main subject position. This is the default mode for ordinary photo-to-claymation delivery.
+   - **Mode B - cinematic comparison**: use when comparing the source photo against a separately directed 16:9 cinematic shot, or when the result intentionally expands the environment, changes focal length, changes shot distance, or creates a film-still composition.
+3. Choose the join direction from the cleaned source image:
+   - landscape: stack original and result vertically
+   - portrait: place original and result side by side horizontally
+   - square: stack original and result vertically
+4. Make both sections identical in width and height before joining.
+
+Mode A sizing:
 
 - Keep the original photo faithful in one section. Permit only proportional scaling or a slight crop needed to match the comparison layout.
-- Before composition, crop useless border information from the original photo, including black bars, blank scan margins, app-preview padding, or solid non-photo edges.
-- Put the generated claymation still in the other section. The generated still must match the cleaned original photo's pixel dimensions before final composition.
-- For comparison delivery, align the generated result to the source photo's core visual anchor before composition. The main person or core subject should keep a similar size, head/body scale, body crop, and position in both sections.
-- A separate 16:9 cinematic shot may be used in the comparison only when both sides are aligned by the core subject anchor, not by blind center-crop. It is acceptable to enlarge and crop the cleaned original photo to match the cinematic shot's subject scale and position when the cinematic shot is the desired comparison target.
-- When enlarging the source photo for a cinematic comparison, choose the crop anchor from the body evidence. If the subject's lower body, waist, bag, strap, hands, or ground contact are important, keep the lower-left or lower-body anchor fixed and remove extra area from the top/right instead of center-cropping. Do not crop away the waist, hands, bag, or other body cues needed to compare the person.
-- Never include the 4:3 black-bar cinematic frame in the comparison.
-- If the cleaned original image is landscape, stack original and result vertically.
-- If the cleaned original image is portrait, place original and result side by side horizontally.
-- If the cleaned original image is square, stack original and result vertically.
-- Because both sections should already share the same dimensions, avoid cropping during final composition. Use center-crop only as a fallback when a generation tool produced an unavoidable aspect-ratio mismatch; preserve the person's face and main subject.
+- Resize/crop the generated result to the cleaned source dimensions, then compose.
+
+Mode B sizing:
+
+- Do not blindly center-crop either side. Align the two images like Photoshop layers: mark the visible person/core-subject bounding box in each image, temporarily think of them as overlaid at partial opacity, scale one side proportionally until the core subject height matches, align the important body anchors, then crop both sections to the same cleaned source dimensions.
+- Decide which side is the visual scale target:
+  - If the user wants to show faithful conversion, scale/crop the cinematic image to match the source subject.
+  - If the user wants to show the cinematic shot as the target, enlarge/crop the source photo to match the cinematic subject scale and position. This is the default when a standalone cinematic frame has already been approved or requested.
+- Preserve body evidence when choosing anchors. Use face center, head top, chin, shoulders, waist, hands, bag, strap, and ground contact. If lower body, waist, bag, strap, hands, or ground contact are important, keep the lower-body or lower-left anchor stable and remove extra area from the top/right as needed. Do not crop away the waist, hands, bag, or other body cues needed for comparison.
+- Never include the 4:3 black-bar cinematic frame in a comparison image. Use the 16:9 active cinematic picture if Mode B is chosen.
+
 - Join the two sections directly with no labels, frame, drop shadow, collage tape, watermark, logo, or explanatory text unless the user requests labels.
 - Return the combined comparison image as the final deliverable. Keep the standalone generated result as a source artifact when useful for future edits.
 
