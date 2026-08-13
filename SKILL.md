@@ -1,11 +1,11 @@
 ---
 name: photo-to-claymation-shot
-description: Transform an uploaded portrait or character photo into an Aardman-style claymation cinematic still by first analyzing the photo through the S/W/I/F/T/P/M framework, then generating a handcrafted miniature stop-motion movie shot and, for image delivery, composing before/after comparison and optional cinematic-matte frame deliverables. Use when the user provides a person photo and asks for clay animation, Aardman style, stop-motion film still, claymation character, SWIFTPM-based image prompt/design, original-plus-result comparison delivery, or movie-spec 16:9/4:3 black-bar framing.
+description: Transform an uploaded portrait or character photo into an Aardman-style claymation cinematic still by first analyzing the photo through the S/W/I/F/T/P/M framework, then generating a handcrafted miniature stop-motion movie shot and delivering both an original-plus-result comparison image and a movie-spec cinematic matte frame. Use when the user provides a person photo and asks for clay animation, Aardman style, stop-motion film still, claymation character, SWIFTPM-based image prompt/design, original-plus-result comparison delivery, or movie-spec 16:9/4:3 black-bar framing.
 ---
 
 # Photo To Claymation Shot
 
-Turn one person photo into a claymation-style cinematic image prompt or generated image. Do not merely apply a surface filter; extract the person's recognizable visual facts, then rebuild them as a handmade clay character inside a miniature stop-motion film world. When delivering an image result, compose the original photo and the generated claymation still into one finished comparison image, and create a cinematic matte frame when requested or useful for presentation.
+Turn one person photo into a claymation-style cinematic image prompt or generated image. Do not merely apply a surface filter; extract the person's recognizable visual facts, then rebuild them as a handmade clay character inside a miniature stop-motion film world. When delivering an image result, provide two finished files by default: an original-photo-plus-result comparison image and a cinematic matte frame.
 
 ## When To Use
 
@@ -29,8 +29,17 @@ Use this skill when the user provides or references a person photo and asks to:
 7. Inspect the cleaned source image pixel dimensions and use the same width, height, and aspect ratio as the target dimensions for the generated claymation still.
 8. Produce the requested output:
    - If the user asks for a prompt, output the photo breakdown and the final S/W/I/F/T/P/M prompt.
-   - If the user asks for an image, internally perform the breakdown, generate the claymation still, then compose the original photo and generated still into one finished comparison image unless the user explicitly asks for the effect image only.
-   - If the user asks for a cinematic, movie-spec, poster-like, film-frame, or presentation-ready image, generate a separate 16:9 cinematic shot first, then create a cinematic matte frame from that shot.
+   - If the user asks for an image, internally perform the breakdown, generate the claymation still, then deliver both required image artifacts: the comparison image and the cinematic matte frame.
+   - If the user explicitly asks for only one artifact, honor that narrower request.
+
+## Required Image Deliverables
+
+For image-generation tasks, deliver these two files unless the user explicitly narrows the request:
+
+1. **Comparison image**: original photo plus claymation result in one clean before/after composition.
+2. **Cinematic matte frame**: a movie-spec claymation still with a 16:9 active picture placed inside a 4:3 black-bar canvas.
+
+Keep any standalone generated result or 16:9 active cinematic picture as source artifacts when useful for future edits, but do not treat them as the primary delivery unless requested.
 
 ## Output Formats
 
@@ -62,7 +71,7 @@ For direct image generation, explicitly set or request the generated claymation 
 
 ## Image Delivery Composition
 
-When the user asks for an image result, deliver one combined comparison image by default. Use this decision order:
+When producing the required comparison image, use this decision order:
 
 1. Clean the source: crop useless border information from the original photo first, including black bars, blank scan margins, app-preview padding, or solid non-photo edges.
 2. Choose one comparison mode:
@@ -89,13 +98,13 @@ Mode B sizing:
 - Never include the 4:3 black-bar cinematic frame in a comparison image. Use the 16:9 active cinematic picture if Mode B is chosen.
 
 - Join the two sections directly with no labels, frame, drop shadow, collage tape, watermark, logo, or explanatory text unless the user requests labels.
-- Return the combined comparison image as the final deliverable. Keep the standalone generated result as a source artifact when useful for future edits.
+- Return the combined comparison image as one of the two required final deliverables. Keep the standalone generated result as a source artifact when useful for future edits.
 
 Use [scripts/compose_comparison.py](scripts/compose_comparison.py) for deterministic composition when local image paths are available.
 
 ## Cinematic Matte Frame
 
-Use this as an additional deliverable when the user asks for a more cinematic, shareable, film-still, poster-like, or animation-movie-spec image.
+Produce this as the second required image deliverable for image-generation tasks.
 
 - Do not create this by cropping the comparison result or a portrait-format generated still.
 - First generate a separate 16:9 cinematic shot that preserves the source person's recognition cues while extending or redesigning the environment as a movie scene.
