@@ -1,11 +1,11 @@
 ---
 name: photo-to-claymation-shot
-description: Transform an uploaded portrait or character photo into an Aardman-style claymation cinematic still by first analyzing the photo through the S/W/I/F/T/P/M framework, then generating a handcrafted miniature stop-motion movie shot and, for image delivery, composing it with the original photo as a before/after comparison. Use when the user provides a person photo and asks for clay animation, Aardman style, stop-motion film still, claymation character, SWIFTPM-based image prompt/design, or original-plus-result comparison delivery.
+description: Transform an uploaded portrait or character photo into an Aardman-style claymation cinematic still by first analyzing the photo through the S/W/I/F/T/P/M framework, then generating a handcrafted miniature stop-motion movie shot and, for image delivery, composing before/after comparison and optional cinematic-matte frame deliverables. Use when the user provides a person photo and asks for clay animation, Aardman style, stop-motion film still, claymation character, SWIFTPM-based image prompt/design, original-plus-result comparison delivery, or movie-spec 16:9/4:3 black-bar framing.
 ---
 
 # Photo To Claymation Shot
 
-Turn one person photo into a claymation-style cinematic image prompt or generated image. Do not merely apply a surface filter; extract the person's recognizable visual facts, then rebuild them as a handmade clay character inside a miniature stop-motion film world. When delivering an image result, compose the original photo and the generated claymation still into one finished comparison image.
+Turn one person photo into a claymation-style cinematic image prompt or generated image. Do not merely apply a surface filter; extract the person's recognizable visual facts, then rebuild them as a handmade clay character inside a miniature stop-motion film world. When delivering an image result, compose the original photo and the generated claymation still into one finished comparison image, and create a cinematic matte frame when requested or useful for presentation.
 
 ## When To Use
 
@@ -16,6 +16,7 @@ Use this skill when the user provides or references a person photo and asks to:
 - analyze the photo with S/W/I/F/T/P/M or SWIFTPM before producing an image prompt
 - batch-generate claymation prompts from portraits or character references
 - deliver an original-photo-plus-claymation-result comparison image
+- deliver a movie-spec cinematic frame with a 16:9 image area inside a 4:3 black-bar canvas
 
 ## Workflow
 
@@ -29,6 +30,7 @@ Use this skill when the user provides or references a person photo and asks to:
 8. Produce the requested output:
    - If the user asks for a prompt, output the photo breakdown and the final S/W/I/F/T/P/M prompt.
    - If the user asks for an image, internally perform the breakdown, generate the claymation still, then compose the original photo and generated still into one finished comparison image unless the user explicitly asks for the effect image only.
+   - If the user asks for a cinematic, movie-spec, poster-like, film-frame, or presentation-ready image, also create a cinematic matte frame from the generated still.
 
 ## Output Formats
 
@@ -73,6 +75,19 @@ When the user asks for an image result, deliver one combined comparison image by
 - Return the combined comparison image as the final deliverable. Keep the standalone generated result as a source artifact when useful for future edits.
 
 Use [scripts/compose_comparison.py](scripts/compose_comparison.py) for deterministic composition when local image paths are available.
+
+## Cinematic Matte Frame
+
+Use this as an additional deliverable when the user asks for a more cinematic, shareable, film-still, poster-like, or animation-movie-spec image.
+
+- Create the claymation still as a 16:9 active picture whenever possible.
+- Place the 16:9 active picture inside a 4:3 final canvas with black bars above and below.
+- Default final canvas: `1440 x 1080`; default active picture: `1440 x 810`; top and bottom bars: `135 px` each.
+- For higher-resolution delivery, use another 4:3 canvas while preserving the same math, for example `1920 x 1440` with a `1920 x 1080` active picture.
+- Keep the active picture free of text, logos, watermarks, and fake lettering.
+- The cinematic matte frame is a display deliverable, not the source image for before/after comparison. Keep comparison composition based on the cleaned source photo dimensions.
+
+Use [scripts/create_cinematic_frame.py](scripts/create_cinematic_frame.py) for deterministic matte framing when a standalone generated result is available.
 
 ## Guardrails
 
