@@ -1,0 +1,4 @@
+interface:
+  display_name: "Photo To Claymation Shot"
+  short_description: "Turn portraits into claymation film stills."
+  default_prompt: "Use $photo-to-claymation-shot to turn this person photo into an Aardman-style claymation cinematic still."
