@@ -15,6 +15,8 @@ This Codex skill is designed for photo-to-image workflows where the output shoul
   - portrait source images: original and result side by side
   - landscape source images: original above result
   - square source images: original above result
+  - same-framing results are resized/cropped directly to the cleaned source dimensions
+  - cinematic results use a Photoshop-like layer alignment step so the core subject height and body anchors match before cropping
 - Optionally creates a cinematic matte frame:
   - final canvas: 4:3
   - active movie picture: 16:9
