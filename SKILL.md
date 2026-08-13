@@ -68,7 +68,8 @@ When the user asks for an image result, deliver one combined comparison image by
 - Before composition, crop useless border information from the original photo, including black bars, blank scan margins, app-preview padding, or solid non-photo edges.
 - Put the generated claymation still in the other section. The generated still must match the cleaned original photo's pixel dimensions before final composition.
 - For comparison delivery, align the generated result to the source photo's core visual anchor before composition. The main person or core subject should keep a similar size, head/body scale, body crop, and position in both sections.
-- A separate 16:9 cinematic shot may be used in the comparison only when it is cropped or scaled by the core subject anchor, not by blind center-crop. Never include the 4:3 black-bar cinematic frame in the comparison.
+- A separate 16:9 cinematic shot may be used in the comparison only when both sides are aligned by the core subject anchor, not by blind center-crop. It is acceptable to enlarge and crop the cleaned original photo to match the cinematic shot's subject scale and position when the cinematic shot is the desired comparison target.
+- Never include the 4:3 black-bar cinematic frame in the comparison.
 - If the cleaned original image is landscape, stack original and result vertically.
 - If the cleaned original image is portrait, place original and result side by side horizontally.
 - If the cleaned original image is square, stack original and result vertically.
