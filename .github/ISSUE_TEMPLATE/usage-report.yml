@@ -1,0 +1,49 @@
+name: Usage report
+description: Tell us how you used this photo-to-claymation skill.
+title: "[Usage] "
+labels:
+  - usage-report
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for using this skill.
+        Please do not share private portraits, children's photos, client images, or photos you do not have permission to publish.
+  - type: input
+    id: user_role
+    attributes:
+      label: Your role
+      description: e.g. creator, teacher, marketer, designer, parent, photographer
+    validations:
+      required: false
+  - type: dropdown
+    id: use_case
+    attributes:
+      label: Use case
+      options:
+        - Personal portrait experiment
+        - Character concept
+        - Marketing/social visual
+        - Teaching/demo material
+        - Client work
+        - Other
+    validations:
+      required: false
+  - type: dropdown
+    id: output_type
+    attributes:
+      label: Output type used
+      options:
+        - Cinematic claymation frame
+        - Before/after comparison
+        - Prompt/style analysis only
+        - Other
+    validations:
+      required: false
+  - type: textarea
+    id: feedback
+    attributes:
+      label: What worked or needs improvement?
+      description: Share only non-sensitive feedback.
+    validations:
+      required: false
